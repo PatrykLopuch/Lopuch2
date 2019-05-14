@@ -39,7 +39,13 @@ class TestController extends AbstractController
      * @param int $id
      * @return Response
      *
-     * uwaga tutaj wywalało ten type-hinted, problemem byla lterowka w int w definicji funkcji
+     * @Route(
+     *     "/{id}",
+     *     name="test_view",
+     *     requirements={"id": "[1-9]\d*"},
+     * )
+     *
+     * uwaga tutaj wywalało ten type-hinted, problemem byla literówka w int w definicji funkcji w ()
      */
  public function view(TestRepository $repository, int $id): Response
  {

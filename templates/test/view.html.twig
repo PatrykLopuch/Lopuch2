@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block body %}
-     <h1>View item</h1>
+     <h1>{{ 'View item' | trans }}</h1>
     {% if item is defined and item|length %}
         <dl>
-            <dt>Title</dt>
+            <dt>{{ 'label.title' | trans}}</dt>
             <dd>{{ item.title }}</dd>
-            <dt>Tags</dt>
+            <dt>{{ 'label.tags' | trans }}</dt>
             <dd>{{ item.tags|join(', ') }}</dd>
         </dl>
     {% else %}
