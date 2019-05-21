@@ -2,13 +2,14 @@
 
 namespace App\DataFixtures;
 
-//use App\DataFixtures\AbstractBaseFixtures.php;
+//use App\DataFixtures\AbstractBaseFixtures;
 use App\Entity\Task;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 
-class php extends AbstractBaseFixtures
+class php extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Faker.
@@ -41,5 +42,16 @@ class php extends AbstractBaseFixtures
         }
 
         $manager->flush();
+    }
+
+    /**
+     * This method must return an array of fixtures classes
+     * on which the implementing class depends on.
+     *
+     * @return array Array of dependencies
+     */
+    public function getDependencies(): array
+    {
+        return [CategoryFixtures::class];
     }
 }

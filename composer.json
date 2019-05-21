@@ -18,7 +18,8 @@
         "symfony/framework-bundle": "3.4.*",
         "symfony/translation": "3.4.*",
         "symfony/twig-bundle": "3.4.*",
-        "symfony/yaml": "3.4.*"
+        "symfony/yaml": "3.4.*",
+        "twig/extensions": "^1.5"
     },
     "config": {
         "preferred-install": {

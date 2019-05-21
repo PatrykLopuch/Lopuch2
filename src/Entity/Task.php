@@ -41,6 +41,12 @@ class Task
     private $updatedAt;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tasks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
      * Getter for Id
      *
      * @return int|null
@@ -128,5 +134,17 @@ class Task
      * @constant int NUMBER_OF_ITEMS
      */
     const NUMBER_OF_ITEMS = 3;
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
 // ...
 }
