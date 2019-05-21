@@ -7,9 +7,12 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Repository\TaskRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Class TaskController.
@@ -30,11 +33,17 @@ class TaskController extends AbstractController
      *     name="task_index",
      * )
      */
-    public function index(TaskRepository $repository): Response
+    public function index(Request $request, TaskRepository $repository, PaginatorInterface $paginator): Response
     {
+        $pagination = $paginator->paginate(
+            $repository->queryAll(),
+            $request->query->getInt('page',1),
+            Task::NUMBER_OF_ITEMS
+        );
+
         return $this->render(
             'task/index.html.twig',
-            ['tasks' => $repository->findAll()]
+            ['pagination'=> $pagination]
         );
     }
 

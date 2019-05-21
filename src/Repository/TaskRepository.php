@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,7 +18,33 @@ class TaskRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Task::class);
+
     }
+
+    /**
+     * Query all records
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query Builder
+     */
+    public function queryAll(): QueryBuilder
+    {
+        return $this->getOrCreateQueryBuilder()
+            ->orderBy('t.updatedAt','DESC');
+    }
+
+    /**
+     * Query Builder
+     *
+     * @param QueryBuilder|null $queryBuilder
+     * @return QueryBuilder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?: $this->createQueryBuilder('t');
+    }
+
+
+
 
     // /**
     //  * @return Task[] Returns an array of Task objects
